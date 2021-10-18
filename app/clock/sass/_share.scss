@@ -1,18 +1,42 @@
+.share{
+  padding-bottom: px2rem(240px);
+  .disc{
+    margin: px2rem(13px) px2rem(20px) 0  px2rem(20px);
+    border-bottom: 1px solid rgba(203, 203, 203, 1);
+    padding-bottom: px2rem(50px);
+  }
+}
 .clock_detail{
   width: 100%;
   // height: px2rem(534px);
-  text-align: center;
-  padding: px2rem(40px) 0;
+  padding: 0 px2rem(50px);
   overflow: hidden;
-  margin-top: px2rem(-20px);
+  margin-top: px2rem(-66px);
   border-radius: px2rem(10px) px2rem(10px) 0px 0px;
   background: #fff;
+  position: relative;
   p{
-    font-size: px2rem(48px);
-    padding: px2rem(19px) 0;
-    height: px2rem(86px);
+    font-size: px2rem(30px);
+    padding: px2rem(43px) 0 0;
     line-height: px2rem(48px);
-
+    letter-spacing: px2rem(2px);
+    &::before{
+      content: '';
+      width: px2rem(8px);
+      height: px2rem(8px);
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      margin: px2rem(20px) 0 0 px2rem(-20px);
+      background-color: #03899CFF;
+      padding: 0 px2rem(4px);
+    }
+    span{
+      color: rgba(3, 137, 156, 1);
+      font-size: px2rem(40px);
+      top: px2rem(-4px);
+      position: relative;
+    }
   }
   .count{
     padding: 0 px2rem(20px);
@@ -29,14 +53,17 @@
     line-height: px2rem(100px);
     border-radius: px2rem(50px);
     display: block;
+    text-align: center;
+    font-weight: bold;
     &.btn_vip{
       font-size: px2rem(40px);
       background: #fe7a00;
       color: #fff;
       width: px2rem(625px);
-      margin: px2rem(103px) auto px2rem(126px);
       position: fixed;
-      bottom: px2rem(30px);
+      bottom: px2rem(95px);
+      margin-left: 50%;
+      left: px2rem(-314px);
     }
     &.btn_count{
       background: rgba(255, 171, 0, 0);

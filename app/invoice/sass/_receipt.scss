@@ -1,0 +1,86 @@
+.receipt{
+  font-size: px2rem(10px);
+  .shop_info{
+    visibility: hidden;
+  }
+  .office_info{
+    padding: px2rem(10px ) px2rem(20px);
+    border: 1px solid rgba(54, 54, 54, 0.1);
+    &::before{
+      content: 'Receipt';
+      position: absolute;
+      font-weight: 700;
+      font-size: px2rem(16px);
+      margin-top: px2rem(-40px);
+      margin-left: px2rem(-20px);
+    }
+    .tip{
+      font-size: px2rem(10px);
+    }
+    td{
+      width: px2rem(100px);
+      height: px2rem(16px);
+      line-height: px2rem(16px);
+    }
+  }
+  .invoice{
+    @extend .office_info;
+    margin-top: px2rem(8px);
+    padding-bottom: px2rem(50px);
+    &::before{
+      display: none;
+    }
+    .date_time{
+      padding-left: px2rem(40px);
+    }
+  }
+  .info{
+    clear: both;
+    padding-top: px2rem(8px);
+    td{
+      height: px2rem(22px);
+      line-height: px2rem(22px);
+    }
+    .left_first{
+      border: 1px solid rgba(203, 203, 203, 1);
+      thead{
+        td{
+          border-bottom: 1px solid rgba(203, 203, 203, 1);
+        }
+      }
+      tfoot{
+        td{
+          border-top: 1px solid rgba(203, 203, 203, 1);
+        }
+      }
+    }
+    .right{
+      margin-left: px2rem(8px);
+      table{
+        tr{
+          td:nth-child(2){
+            text-align: right;
+            padding-right: px2rem(14px);
+          }
+        }
+        &:nth-child(2n) {
+          margin-top: px2rem(8px);
+        }
+      }
+      td{
+        border: 1px solid rgba(203, 203, 203, 1);
+        padding-left: px2rem(20px);
+      }
+    }
+    .right_second{
+      td{
+        width: 50%;
+      }
+    }
+  }
+  .footer{
+    p:last-child{
+      visibility: hidden;
+    }
+  }
+}

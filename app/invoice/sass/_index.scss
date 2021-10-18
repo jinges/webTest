@@ -1,0 +1,132 @@
+.index{
+  padding: 10px 0 50px;
+  font-size: px2rem(10px);
+  .page{
+    width: 794px;
+    height: 1123px;
+    margin: 10px auto;
+    box-shadow: 1px 1px 4px #000;
+    padding: px2rem(16px) px2rem(16px) 0;
+    position: relative;
+  }
+  .header{
+    padding-bottom: px2rem(7px);
+  }
+  .footer{
+    padding: 0 px2rem(16px);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-left: px2rem(-16px);
+    .box{
+      padding: px2rem(8px) 0 px2rem(9px);
+      border-top: 1px solid rgba(54, 54, 54, 0.26);
+    }
+    .page_num{
+      padding: 0 px2rem(8px) 0 px2rem(2px);
+    }
+  }
+  .shop_info{
+    // font-size: px2rem(6.5px);
+  }
+  .invoice{
+    font-weight: 400;
+    td{
+      padding-bottom: px2rem(3px);
+    }
+    &::before{
+      content: 'Invoice';
+      font-weight: 600;
+      font-size: px2rem(12px);
+      margin-top: px2rem(-14px);
+      position: absolute;
+    }
+  }
+  .invoice_info{
+    border-top: 1px solid rgba(54, 54, 54, 0.26);
+    padding: px2rem(3px) 0;
+    td{
+      padding: px2rem(1px) 0;
+      font-weight: 400;
+      span{
+        font-weight: 500;
+      }
+    }
+  }
+  .list{
+    padding: px2rem(2px) 0 0;
+    thead{
+      font-weight: 600;
+      td{
+        border-width: 1px 0 1px;
+        border-color: rgba(54, 54, 54, 0.26);
+        border-style: solid;
+        height: px2rem(24px);
+      }
+    }
+    tbody{
+      text-align: center;
+      tr{
+        td{
+          height:  px2rem(14px);
+          line-height: px2rem(14px);
+          font-weight: 500;
+          &:nth-child(2),
+          &:nth-child(3){
+            text-align: left;
+          }
+          &.total{
+            height:  px2rem(18px);
+            line-height: px2rem(18px);
+            span{
+              min-width: px2rem(60px);
+            }
+          }
+        }
+      }
+    }
+  }
+  .count_total{
+    border-top: 1px solid rgba(54, 54, 54, 0.26);
+    .total{
+      height: px2rem(16px);
+      line-height: px2rem(16px);
+      span{
+        margin-right: px2rem(20px);
+        @extend .dib;
+      }
+      .title{
+        font-size: px2rem(8px);
+        font-weight: 600;
+      }
+    }
+    .grid{
+      padding: px2rem(2px) 0;
+    }
+    .left{
+      width: 40%;
+      text-align: center;
+      .b{
+        font-weight: 600;
+      }
+    }
+  }
+}
+.note{
+  font-size: px2rem(8px);
+}
+
+@media print{
+  @page{
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+  }
+  .index{
+    padding: 0;
+    .page{
+      margin: 0;
+    }
+  }
+}

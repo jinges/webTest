@@ -1,0 +1,68 @@
+@mixin setHeight($h, $lh: $h) {
+	height: $h;
+	@if ($lh) {
+		line-height: $lh;
+	} else {
+		line-height: $h;
+	}
+}
+
+@mixin borderRadius($n: 5px) {
+	-ms-border-radius: $n;
+	-moz-border-radius: $n;
+	-webkit-border-radius: $n;
+	border-radius: $n;
+}
+
+@mixin rotate($n){
+	-ms-transform: rotate($n+deg);
+	-moz-transform: rotate($n+deg);
+	-webkit-transform: rotate($n+deg);
+	transform: rotate($n+deg);
+}
+
+@mixin translates($x, $y:0) {
+	-ms-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	-webkit-transform: translate($x, $y);
+	transform: translate($x, $y);
+}
+
+@mixin scales($x, $y) {
+	-ms-transform: scale($x, $y);
+	-moz-transform: scale($x, $y);
+	-webkit-transform: scale($x, $y);
+	transform: scale($x, $y);
+}
+
+@mixin transforms($x, $y, $d: 0, $n:1) {
+	-webkit-transform: translate($x, $y) rotate($d) scale($n);
+	transform: translate($x, $y) rotate($d) scale($n);
+}
+
+@mixin delay($t) {
+	animation-delay: $t;
+	-webkit-animation-delay: $t;
+}
+
+@mixin keyframes($animationName) {
+	@-webkit-keyframes #{$animationName} {
+		@content;
+	}
+
+	@-moz-keyframes #{$animationName} {
+		@content;
+	}
+
+	@-o-keyframes #{$animationName} {
+		@content;
+	}
+
+	@keyframes #{$animationName} {
+		@content;
+	}
+}
+
+@mixin justify($n: initial){
+	justify-content: $n;
+}

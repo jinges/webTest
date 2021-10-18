@@ -1,0 +1,25 @@
+<script type="text/html" id="receiptInfo_tmp">
+  <tbody>
+    <tr>
+      <td class="tip b600" colspan="2">
+          Receipt No: R235066
+          <span class="date_time"><%=time%></span>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="2">
+          <%:=leftInfo.join('<br/>')%>
+        </td>
+        <td>
+          <%:=rightInfo.join('<br/>')%>
+        </td>
+      </tr>
+      <tr>
+        <td>T: <%=t%></td>
+      </tr>
+      <tr>
+        <td>Customer ID: <span class="cus_id"><%=customerId%></span></td>
+        <td>Cashier ID: <span class="b500"><%=cashierId%></span></td>
+    </tr>
+  </tbody>
+</script>
