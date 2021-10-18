@@ -14,10 +14,12 @@ const gulp = require('gulp'),
     fs = require('fs'),
     opn = require('opn'),
     babel = require('gulp-babel'),
-    replace = require('gulp-replace')
+    replace = require('gulp-replace'),
+    templatejs = require('gulp-templatejs'),
     assetRev = require('gulp-asset-rev');
 
 var paths = {};
+var host = '192.168.0.9';
 
 
 function logError(err) {
@@ -103,11 +105,18 @@ gulp.task('images', function() {
 });
 
 
-gulp.task('connect', ['concat', 'sass', 'script', 'images', 'fonts', 'static'], function () {
+gulp.task('template', function(){
+    return gulp.src(paths.origin.template)
+        .pipe(livereload());
+})
+
+
+
+gulp.task('connect', ['concat', 'sass', 'script', 'images','template', 'fonts', 'static'], function () {
     connect.server({
         livereload:true,
         root: paths.tmp_root,
-        host: '192.168.3.14',
+        host: host,
         port: 8080
     });
 
@@ -121,6 +130,7 @@ gulp.task('watch', function () {
     gulp.watch(paths.origin.script.source, ['script']);
     gulp.watch(paths.origin.images.source, ['images']);
     gulp.watch(paths.origin.images.source, ['static']);
+    gulp.watch(paths.origin.template, ['template']);
     livereload.listen();
 });
 
@@ -174,6 +184,12 @@ gulp.task('clock-config', function () {
     var notePath = require('./config/clock-path.js');
     paths = notePath;
 })
+gulp.task('invoice-config', function () {
+    var notePath = require('./config/invoice-path.js');
+    paths = notePath;
+})
+
+
 
 gulp.task('web', ['web-config', 'connect', 'watch'])
 
@@ -214,6 +230,12 @@ gulp.task('clock', ['clock-config', 'connect', 'watch'], function () {
  
 })
 
-gulp.task('default', ['clock'], function(){
-    opn('http://192.168.3.14:8080');
+gulp.task('invoice', ['invoice-config', 'connect', 'watch'], function () {
+ 
+})
+
+
+
+gulp.task('default', ['invoice'], function(){
+    opn('http://'+host+':8080');
 })
