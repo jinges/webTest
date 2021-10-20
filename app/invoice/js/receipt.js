@@ -1,11 +1,10 @@
 function initReceiptPage(){
-  var queryId = getParams('queryId');
+  var queryId = getParams('queryId') || 1;
   getData('receipt',{queryId: queryId},function(err, res){
-    console.log(res);
-    var tpl = $('#dhamechaHeadOffice_tmp').html();
-    $('#dhamechaHeadOffice').html(template(tpl, res.dhamechaHeadOffice));
-
-    var tpl2 = $('#receiptInfo_tmp').html();
-    $('#receiptInfo').html(template(tpl2, res.receiptInfo));
+    var list = ['dhamechaHeadOffice','receiptInfo','invoiceTotalInfo','paymentTotalInfo','paymentTotalInfo','iouSummary'];
+    for(var item of list) {
+      console.log(res[item]);
+      $('#'+item).html(template($('#'+item+'_tmp').html(), res[item]));
+    }
   })
 }

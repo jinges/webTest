@@ -1,0 +1,18 @@
+<script type="text/html" id='invoiceDetailList_tmp'>
+
+    <% for(var i in invoiceDetailList) { %>
+      <% var item = invoiceDetailList[i]%>
+      <tr>
+        <td><%=item.productCode%></td>
+        <td><%=item.productDescriptionLeft%></td>
+        <td><%=item.productDescriptionRight%></td>
+        <td><%=item.uop%></td>
+        <td><%=item.unitofSale%></td>
+        <td><%=item.quantity%></td>
+        <td><%=item.price%></td>
+        <td><%=item.rrp%></td>
+        <td><%=item.por%></td>
+        <td><%=item.vat%></td>
+      </tr>
+    <%}%>
+</script>

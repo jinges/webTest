@@ -1,0 +1,38 @@
+<script type="text/html" id="totalInfo_tmp">
+
+    <article class="count_total" id="totalInfo">
+ <table  align="center">
+  <tbody>
+    <tr class="total">
+      <td colspan="7">
+        <span>Items Total:<%=totalInfo.itemsTotal%></span>
+        <span>Cases:<%=totalInfo.cases%></span>
+        <span>Singles:<%=totalInfo.singles%></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="b">Code</td>
+      <td class="b">Rate</td>
+      <td class="b">Value of Goods</td>
+      <td class="b">VAT</td>
+      <td width="300"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% for(var i in rateInfoList) { %>
+      <% var item = rateInfoList[i]%>
+        <tr>
+          <td><%=item.code%></td>
+          <td><%=item.rate%></td>
+          <td><%=item.valueOfGoods%></td>
+          <td><%=item.vat%></td>
+          <td></td>
+          <td><%:=item.lastTitle%></td>
+          <td><%:=item.lastItem%></td>
+        </tr>
+    <% }%>
+  </tbody>
+</table>
+  <p class="note">Please note that due to the unprecedented trading conditions we will not accept any goods being returned until further notice.</p>
+ </article> 
+</script>

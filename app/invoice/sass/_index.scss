@@ -43,18 +43,23 @@
     }
   }
   .invoice_info{
-    border-top: 1px solid rgba(54, 54, 54, 0.26);
-    padding: px2rem(3px) 0;
+    tr:nth-child(3){
+      td{
+        border-top: 1px solid rgba(54, 54, 54, 0.26);
+        padding: px2rem(6px) 0;
+      }
+    }
     td{
       padding: px2rem(1px) 0;
       font-weight: 400;
+      font-size: px2rem(8px);
+      padding: px2rem(2px) 0;
       span{
         font-weight: 500;
       }
     }
   }
   .list{
-    padding: px2rem(2px) 0 0;
     thead{
       font-weight: 600;
       td{
@@ -88,6 +93,24 @@
   }
   .count_total{
     border-top: 1px solid rgba(54, 54, 54, 0.26);
+    font-size: px2rem(9px);
+    tr{
+      td{
+        width: px2rem(30px);
+        text-align: center;
+        &:nth-last-child(1){
+          text-align: right;
+          padding-right: px2rem(20px);
+          font-size: px2rem(11px);
+        }
+        &:nth-last-child(2){
+          text-align: left;
+        }
+        &:first-child{
+          width: px2rem(10px);
+        }
+      }
+    }
     .total{
       height: px2rem(16px);
       line-height: px2rem(16px);
@@ -95,25 +118,21 @@
         margin-right: px2rem(20px);
         @extend .dib;
       }
-      .title{
-        font-size: px2rem(8px);
-        font-weight: 600;
+      td{
+        text-align: left !important;
+        padding: px2rem(6px) 0 px2rem(6px) px2rem(60px);
+        font-size: px2rem(10px);
+        @extend .b700;
       }
     }
-    .grid{
-      padding: px2rem(2px) 0;
-    }
-    .left{
-      width: 40%;
-      text-align: center;
-      .b{
-        font-weight: 600;
-      }
+    .b{
+      font-weight: 600;
     }
   }
 }
 .note{
   font-size: px2rem(8px);
+  padding-top: px2rem(12px);
 }
 
 @media print{

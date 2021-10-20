@@ -1,0 +1,27 @@
+<script type="text/html" id="invoiceTotalInfo_tmp">
+<table cellspacing="0" class="left_first">
+  <thead align="center">
+    <tr>
+      <td>Invoice No:</td>
+      <td> Sales inc VAT</td>
+      <td> Invoice Type</td>
+    </tr>
+  </thead>
+  <tbody align="center">
+    <% for(var i in invoiceInfoList) { %>
+     <% var item = invoiceInfoList[i]%>
+      <tr>
+        <td><%=item.invoiceNo%></td>
+        <td>£ <%=item.saleIncVat%></td>
+        <td><%=item.invoiceType%></td>
+      </tr>
+   <% }%>
+  </tbody>
+  <tfoot align="center">
+    <tr>
+      <td class="b700">Total Due:</td>
+      <td class="b700" colspan="2"><%=totalDue%></td>
+    </tr>
+  </tfoot>
+</table>
+</script>

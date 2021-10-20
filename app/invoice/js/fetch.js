@@ -26,7 +26,7 @@ function postData(apiName, params, cb){
 function getParams(query){
 	var search = window.location.search + '';
     if (search.charAt(0) != '?') {
-        return 1;
+        return undefined;
     }
     else {
         search = search.replace('?', '').split('&');

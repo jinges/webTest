@@ -1,6 +1,7 @@
 
-var HOST =  'http://digua.natapp1.cc/web';//'http://wx.fxswap.cn';//
+var HOST =  'http://51.195.136.75:9527/web';//'http://wx.fxswap.cn';//
 
 var apilist = {
 	receipt:  HOST+'/print/receipt',
+	invoice: HOST+'/print/invoiceDetail'
 }

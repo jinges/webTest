@@ -10,8 +10,8 @@
       
     </table>
     <div class="grid info">
-      <div class="cell">
-        <table cellspacing="0" class="left_first">
+      <div class="cell" id="invoiceTotalInfo">
+        <!-- <table cellspacing="0" class="left_first">
           <thead align="center">
             <tr>
               <td>Invoice No:</td>
@@ -48,62 +48,16 @@
               <td class="b700" colspan="2">£1,042.30</td>
             </tr>
           </tfoot>
-        </table>
+        </table> -->
       </div>
       <div class="cell right">
-        <table class="right_first" cellspacing="0">
-          <tbody>
-            <tr>
-              <td class="b600" colspan="2">Payments</td>
-              <td class="b600" colspan="2">Total Payments</td>
-            </tr>
-            <tr>
-              <td>Cash</td>
-              <td> 500.00</td>
-              <td class="b600 tc" rowspan="5" colspan="2" style="width: 50%;">£ 1042.30</td>
-            </tr>
-            <tr>
-              <td> Mobile</td>
-              <td> 542.30</td>
-            </tr>
-            <tr>
-              <td> Card</td>
-              <td> 0.00</td>
-            </tr>
-            <tr>
-              <td> IOU</td>
-              <td> 0.00</td>
-            </tr>
-            <tr>
-              <td> Pendings</td>
-              <td> 0.00</td>
-            </tr>
-          </tbody>
-
-          <table class="right_second" cellspacing="0">
-            <tr>
-              <td class="b600" colspan="2">IOU Summary</td>
-            </tr>
-            <tr>
-              <td>
-                B / Fwd IOU's</td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <td>New IOU Issue</td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <td>Paidoff IOU’s</td>
-              <td>0.00</td>
-            </tr>
-            <tr>
-              <td>C / Fwd IOU’s</td>
-              <td>0.00
-              </td>
-            </tr>
-          </table>
+        <table class="right_first" cellspacing="0" id="paymentTotalInfo">
+          
         </table>
+
+          <table class="right_second" cellspacing="0" id="iouSummary">
+            
+          </table>
       </div>
     </div>
     <!--include "./components/layer/page_footer.html"-->
@@ -112,6 +66,9 @@
 
 <!--include "./template/receipt/dhamechaHeadOffice.tmpl"-->
 <!--include "./template/receipt/receiptInfo.tmpl"-->
+<!--include "./template/receipt/invoiceTotalInfo.tmpl"-->
+<!--include "./template/receipt/paymentTotalInfo.tmpl"-->
+<!--include "./template/receipt/iouSummary.tmpl"-->
 <!--include "./components/layer/footer.html"-->
 <script>
   initReceiptPage();
