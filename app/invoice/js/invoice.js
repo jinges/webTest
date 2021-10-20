@@ -16,6 +16,8 @@ function initInvoicePage(){
     var orderInfo = $('#orderInfo_tmp').html();
     content.before(template(orderInfo, res.orderInfo));
 
+    totalInfo(content, res);
+    
     //订单详情
     var list = res.invoiceDetailList;
     list = list.concat(list);
@@ -24,6 +26,7 @@ function initInvoicePage(){
     list = list.concat(list);
 
     var ch = computeContentHeight(firstPage);
+    debugger;
     pagingFun(firstPage, list, ch);
 
   });
@@ -44,6 +47,8 @@ function pagingFun(page, list, ch){
     var ch = computeContentHeight(newPage);
     if((ch - cth) < 20){
       list.unshift(items);
+    } else if(list.length > 10){
+      page.find('.count_total').remove();
     } 
     pagingFun(newPage, list, ch);
   }
