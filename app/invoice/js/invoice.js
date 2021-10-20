@@ -21,28 +21,31 @@ function initInvoicePage(){
     list = list.concat(list);
     list = list.concat(list);
     list = list.concat(list);
+    list = list.concat(list);
 
     var ch = computeContentHeight(firstPage);
-    pagingFun(firstPage, list, 0, ch);
+    pagingFun(firstPage, list, ch);
 
   });
 }
 
-function pagingFun(page, list, startPoint, ch){
-  var endPoint = startPoint + 1;
-  var items = list.slice(startPoint, endPoint);
+function pagingFun(page, list, ch){
+  var items = list.splice(0, 1);
   var content = page.find('.content');
   content.find('tbody').append(invoiceRnder(items));
   var cth = content.height();
-  if(list.length <= endPoint){
+  if(list.length <= 0){
     return false;
   }
-  if(cth < ch){
-    pagingFun(page, list, endPoint, ch);
+  if((ch - cth) > 20){
+    pagingFun(page, list, ch);
   } else {
     var newPage = addNewPage(page);
     var ch = computeContentHeight(newPage);
-    pagingFun(newPage, list, endPoint, ch);
+    if((ch - cth) < 20){
+      list.unshift(items);
+    } 
+    pagingFun(newPage, list, ch);
   }
 }
 

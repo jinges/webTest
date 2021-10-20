@@ -91,6 +91,10 @@
       }
     }
   }
+  .content{
+    display: inline-block;
+    width: 100%;
+  }
   .count_total{
     border-top: 1px solid rgba(54, 54, 54, 0.26);
     font-size: px2rem(9px);
