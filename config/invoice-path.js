@@ -41,8 +41,8 @@ var pcpaths = {
                 root + '/js/libs/zepto.js',
                 root + '/js/config.js',
                 root + '/js/fetch.js',
-                root + '/js/render.js',
                 root + '/js/receipt.js',
+                root + '/js/invoice.js',
             ],
             build: tmp_root + '/js'
         },
