@@ -8,6 +8,7 @@
     box-shadow: 1px 1px 4px #000;
     padding: px2rem(16px) px2rem(16px) 0;
     position: relative;
+    background: #fff;
   }
   .header{
     padding-bottom: px2rem(7px);
@@ -50,10 +51,9 @@
       }
     }
     td{
-      padding: px2rem(1px) 0;
       font-weight: 400;
-      font-size: px2rem(8px);
-      padding: px2rem(2px) 0;
+      font-size: px2rem(9.6px);
+      padding: px2rem(4px) 0;
       span{
         font-weight: 500;
       }
@@ -98,6 +98,8 @@
   .count_total{
     border-top: 1px solid rgba(54, 54, 54, 0.26);
     font-size: px2rem(9px);
+    margin-top: px2rem(6px);
+    padding-top: px2rem(8px);
     tr{
       td{
         width: px2rem(30px);
@@ -137,6 +139,7 @@
 .note{
   font-size: px2rem(8px);
   padding-top: px2rem(12px);
+  text-align: left;
 }
 
 @media print{
@@ -150,6 +153,7 @@
     padding: 0;
     .page{
       margin: 0;
+      box-shadow: 0 0 0 #000;
     }
   }
 }

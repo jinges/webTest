@@ -3,13 +3,6 @@
 <article class="count_total" id="totalInfo">
  <table  align="center">
   <tbody>
-    <tr class="total">
-      <td colspan="7">
-        <span>Items Total:<%=totalInfo.itemsTotal%></span>
-        <span>Cases:<%=totalInfo.cases%></span>
-        <span>Singles:<%=totalInfo.singles%></span>
-      </td>
-    </tr>
     <tr>
       <td class="b">Code</td>
       <td class="b">Rate</td>
@@ -31,8 +24,11 @@
           <td><%:=item.lastItem%></td>
         </tr>
     <% }%>
+    <tr>
+      <td colspan="7">
+  <p class="note">Please note that due to the unprecedented trading conditions we will not accept any goods being returned until further notice.</p></td>
+    </tr>
   </tbody>
 </table>
-  <p class="note">Please note that due to the unprecedented trading conditions we will not accept any goods being returned until further notice.</p>
  </article> 
 </script>

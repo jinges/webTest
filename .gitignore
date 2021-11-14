@@ -14,7 +14,7 @@
 /app/vote
 /app/web
 
-/build
+/build/*
 
 package-lock.json
 

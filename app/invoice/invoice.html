@@ -1,32 +1,33 @@
 <!--include "./components/layer/header.html"-->
 <section class="index">
-  <section class="page" id="page1" data-index="1">
-    <!--include "./components/layer/page_header.html"-->
-    <article class="content">
-      <table class="list" cellspacing="0">
-        <thead align="center">
-          <tr>
-            <td>Item Code</td>
-
-            <td>Description</td>
-            <td></td>
-            <td>Pack Size </td>
-            <td>Unit of Sale</td>
-            <td>Quantity</td>
-            <td>Price</td>
-            <td>RRP</td>
-            <td>POR</td>
-            <td>VAT</td>
-          </tr>
-        </thead>
-        <tbody>
-
-
-        </tbody>
-      </table>
-    </article>
-    <!--include "./components/layer/page_footer.html"-->
-  </section>
+  <article class="invoicePage" id="invoice0">
+    <section class="page" id="page1" data-index="1">
+      <!--include "./components/layer/page_header.html"-->
+      <article class="content">
+        <table class="list" cellspacing="0">
+          <thead align="center">
+            <tr>
+              <td>Item Code</td>
+  
+              <td>Description</td>
+              <td>Pack Size </td>
+              <td>Unit of Sale</td>
+              <td>Quantity</td>
+              <td>Price(£)</td>
+              <td>RRP(£)</td>
+              <td>POR</td>
+              <td>VAT</td>
+            </tr>
+          </thead>
+          <tbody>
+  
+  
+          </tbody>
+        </table>
+      </article>
+      <!--include "./components/layer/page_footer.html"-->
+    </section>
+  </article>
 </section>
 <!--include "./components/layer/footer.html"-->
 
@@ -36,5 +37,7 @@
 <!--include "./template/invoice/totalInfo.tmpl"-->
 <!--include "./template/invoice/invoiceDetailList.tmpl"-->
 <script>
-  initInvoicePage();
+  $(function(){
+    initInvoicePage();
+  })
 </script>

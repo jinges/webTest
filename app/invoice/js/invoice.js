@@ -1,56 +1,71 @@
 function initInvoicePage(){
-  
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
-
   getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
-    var firstPage = $('#page1');
-    var content = firstPage.find('.content');
     
-    var invoice_tmp = $('#invoice_tmp').html();
-    content.before(template(invoice_tmp, {
-      invoice: res.invoice,
-      business: res.business
-    }));
-
-    var orderInfo = $('#orderInfo_tmp').html();
-    content.before(template(orderInfo, res.orderInfo));
-
-    totalInfo(content, res);
-    
-    //订单详情
-    var list = res.invoiceDetailList;
-    list = list.concat(list);
-    list = list.concat(list);
-    list = list.concat(list);
-    list = list.concat(list);
-
-    var ch = computeContentHeight(firstPage);
-    debugger;
-    pagingFun(firstPage, list, ch);
-
+    for(var index = 0,len  = res.length; index < len; index++){
+      if(index){
+        console.log(index);
+        debugger;
+        var lastInvoice = $('.invoicePage').last()
+        var invoice = lastInvoice.clone();
+        invoice.attr('id', 'invoice'+index);
+        invoice.find('.invoice,.invoice_info,.count_total, .list tbody tr').remove()
+        lastInvoice.after(invoice);
+      }
+      var invoice = $('#invoice'+index);
+      invoice.find('.page').not('section[id="page1"]').remove();
+      var data = res[index];
+      renderInvocie(invoice, data)
+      data = null;
+    }
   });
 }
 
-function pagingFun(page, list, ch){
-  var items = list.splice(0, 1);
+function renderInvocie(invoice, data){
+  var page = $(invoice).find('#page1');
   var content = page.find('.content');
-  content.find('tbody').append(invoiceRnder(items));
-  var cth = content.height();
-  if(list.length <= 0){
+  var invoice_tmp = $('#invoice_tmp').html();
+  var invoiceStr = template(invoice_tmp, {
+    invoice: data.invoice,
+    business: data.business
+  });
+  content.before(invoiceStr);
+  invoiceStr = '';
+
+  var orderInfo = $('#orderInfo_tmp').html();
+  var orderInfoStr = template(orderInfo, data.orderInfo);
+  content.before(orderInfoStr);
+  orderInfoStr = null;
+  
+  //订单详情
+  var list = data.invoiceDetailList;
+  var ch = computeContentHeight(page);
+  pagingFun(page, list, ch);
+
+  totalInfo(data, invoice);
+}
+
+function pagingFun(page, list, ch, step){
+  step = step || 10;
+  var items = list.splice(0, step);
+  var content = page.find('.content');
+  if(!items.length){
     return false;
   }
-  if((ch - cth) > 20){
-    pagingFun(page, list, ch);
+
+  content.find('.list tbody').append(invoiceRnder(items));
+  var cth = content.height();
+  if((ch - cth) >= 200){
+    pagingFun(page, list, ch, step);
   } else {
-    var newPage = addNewPage(page);
-    var ch = computeContentHeight(newPage);
-    if((ch - cth) < 20){
-      list.unshift(items);
-    } else if(list.length > 10){
-      page.find('.count_total').remove();
-    } 
-    pagingFun(newPage, list, ch);
+    if(ch > (cth + 24)){
+      pagingFun(page, list, ch, 1);
+    } else if(list.length){
+      var nextPage = addNewPage(page);
+      var ch = computeContentHeight(nextPage);
+      pagingFun(nextPage, list, ch);
+    }
   }
 }
 
@@ -74,14 +89,16 @@ function invoiceRnder(list){
 function computeContentHeight(page){
   var h = 0;
   var pageHeight = page.height();
-  page.find('.header,.footer,.invoice,.invoice_info').map(function(i, item){
+  page.find('.header, .invoice, .invoice_info, .footer').map(function(i, item){
     h += $(item).height();
   })
   return pageHeight - h - 22;
 }
 
-function totalInfo(content, res){
+function totalInfo(res, invoice){
     //订单总计
+    var lastPage = $(invoice).find('.page').last();
+    var content = lastPage.find('.content');
     var totalInfo_tmp = $('#totalInfo_tmp').html();
     var totalInfo = res.totalInfo;
     var rateInfoList = res.rateInfoList;
@@ -92,8 +109,31 @@ function totalInfo(content, res){
     rateInfoList[2]['lastTitle'] = 'Total incl VAT:';
     rateInfoList[2]['lastItem'] = '<span class="b">£'+totalInfo.totalinclVAT+'</span>';
 
-    content.append(template(totalInfo_tmp, {
+    var totalStr = template(totalInfo_tmp, {
       totalInfo: res.totalInfo,
       rateInfoList: rateInfoList
-    }));
+    })
+    content.append(totalStr);
+    totalStr = null;
+
+    var cth = content.height();
+    var ch = computeContentHeight(lastPage);
+    if(cth > ch){
+      var nextPage = addNewPage(lastPage);
+      nextPage.find('.list').remove();
+      nextPage.find('.count_total tr').remove();
+      cutTotalTable(lastPage, nextPage, content, ch)
+    }
+}
+
+function cutTotalTable(currentPage, nextPage,content, ch){
+  var lastTr = currentPage.find('.count_total tr').last();
+  var newTr = lastTr.clone();
+  nextPage.find('.count_total tbody').prepend();
+  lastTr.remove();
+  newTr.remove();
+  var cth = content.height();
+  if(cth > ch){
+    cutTotalTable(currentPage, nextPage, content, ch)
+  }
 }

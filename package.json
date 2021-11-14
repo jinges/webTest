@@ -5,14 +5,18 @@
   "main": "gulpfile.js",
   "scripts": {
     "dev": "gulp clean & gulp",
+    "build": "gulp clean & gulp",
     "preinstall": "npx npm-force-resolutions"
   },
   "author": "fengliang",
   "license": "ISC",
   "devDependencies": {
+    "@templatejs/runtime": "^2.4.0",
+    "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
     "del": "^3.0.0",
     "domino": "^1.0.25",
+    "graceful-fs": "^4.2.8",
     "gulp": "^3.9.1",
     "gulp-asset-rev": "0.0.15",
     "gulp-babel": "^7.0.1",
@@ -25,20 +29,19 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-minify-html": "^1.0.6",
     "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
     "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-templatejs": "^2.4.2",
     "gulp-uglify": "^3.0.2",
     "gulp-utf8-convert": "0.0.7",
     "jshint": "^2.10.2",
     "node-sass": "^4.7.2",
     "opn": "^5.5.0",
-    "true-case-path": "^1.0.2"
+    "true-case-path": "^1.0.2",
+    "vinyl-buffer": "^1.0.1"
   },
   "dependencies": {
-    "@templatejs/runtime": "^2.4.0",
-    "babel-core": "^6.26.3",
-    "graceful-fs": "^4.2.8",
-    "gulp-replace": "^1.0.0",
     "jquery": "^3.4.1",
     "natives": "^1.1.6"
   },

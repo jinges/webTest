@@ -1,6 +1,6 @@
 <!--include "./components/layer/header.html"-->
 <section class="index receipt">
-  <section class="page">
+  <section class="page" id="page0">
     <!--include "./components/layer/page_header.html"-->
     <table class="office_info" id="dhamechaHeadOffice">
       
@@ -71,5 +71,7 @@
 <!--include "./template/receipt/iouSummary.tmpl"-->
 <!--include "./components/layer/footer.html"-->
 <script>
-  initReceiptPage();
+  $(function(){
+    initReceiptPage();
+  })
 </script>

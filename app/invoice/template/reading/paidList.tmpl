@@ -1,0 +1,12 @@
+<script type="text/html" id="paidList_tmp">
+<% for (var i in paidList) { %>
+<% var item = paidList[i]%>
+<tr>
+  <td class="b600"><%=item.titel%></td>
+  <td class="b500 violet tu">£ <%=item.cash%></td>
+  <td>£ <%=item.mobile%></td>
+  <td>£ <%=item.card%></td>
+  <td class="b700">£ <%=item.total%></td>
+</tr>
+<%}%>
+</script>

@@ -1,0 +1,25 @@
+<script type="text/html" id="cashierInfo_tmp">
+<tbody>
+  <tr>
+    <td>
+      Cashier Till: <span class="b500"><%=cashierTill%></span>
+    </td>
+    <td>
+      Cashier ID: <span class="b500"><%=cashierId%></span>
+    </td>
+    <td>
+      Cashier Name:<span class="b500"><%=cashierName%></span>
+    </td>
+  </tr>
+  <tr>
+    <td>Logged In: <span class="b500"><%=loggedin%></span></td>
+    <td><% if(loginoff) { %>Logged Off: <span class="b500"><%=loggedOff%></span><%}%></td>
+    <td><span class="b500"></span></td>
+  </tr>
+  <tr>
+    <td>First Invoice Number: <span class="b500"><%=firstInvoiceNumber%></span></td>
+    <td>Last Invoice Number: <span class="b500"><%=lastReceiptNumber%></span></td>
+    <td><span></span></td>
+  </tr>
+</tbody>
+</script>

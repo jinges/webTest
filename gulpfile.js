@@ -76,7 +76,7 @@ gulp.task('script', function () {
             presets: ['es2015']
         }))
         .pipe(concat('app.js'))
-        .pipe(gulp.dest(paths.origin.script.build))
+        // .pipe(gulp.dest(paths.origin.script.build))
         .pipe(uglify())
         .pipe(rename({
           extname: '.min.js'
@@ -239,3 +239,7 @@ gulp.task('invoice', ['invoice-config', 'connect', 'watch'], function () {
 gulp.task('default', ['invoice'], function(){
     opn('http://'+host+':8080');
 })
+
+gulp.task('build', ['invoice'])
+
+

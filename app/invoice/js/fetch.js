@@ -1,4 +1,7 @@
 function ajax(type, url, data, cb){
+	var token = getParams('token');
+	var type = getParams('type');
+	data.token = token;
 	$.ajax({
 		type: type,
 		url: url,
@@ -13,6 +16,9 @@ function ajax(type, url, data, cb){
 			}
 		}
 	})
+	if(type) {
+		alert(JSON.stringify(data));
+	}
 };
 
 function getData (apiName ,params, cb){
