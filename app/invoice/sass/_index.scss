@@ -20,7 +20,7 @@
     width: 100%;
     margin-left: px2rem(-16px);
     .box{
-      padding: px2rem(8px) 0 px2rem(9px);
+      padding: px2rem(8px) 0 px2rem(16px);
       border-top: 1px solid rgba(54, 54, 54, 0.26);
     }
     .page_num{
@@ -99,7 +99,7 @@
     border-top: 1px solid rgba(54, 54, 54, 0.26);
     font-size: px2rem(9px);
     margin-top: px2rem(6px);
-    padding-top: px2rem(8px);
+    // padding-top: px2rem(8px);
     tr{
       td{
         width: px2rem(30px);
@@ -118,15 +118,15 @@
       }
     }
     .total{
-      height: px2rem(16px);
-      line-height: px2rem(16px);
+      height: px2rem(14px);
       span{
         margin-right: px2rem(20px);
+        vertical-align: super;
         @extend .dib;
       }
       td{
         text-align: left !important;
-        padding: px2rem(6px) 0 px2rem(6px) px2rem(60px);
+        padding: px2rem(4px) 0 px2rem(4px) px2rem(60px);
         font-size: px2rem(10px);
         @extend .b700;
       }

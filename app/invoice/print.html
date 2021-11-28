@@ -1,0 +1,11 @@
+<!--include "./components/layer/header.html"-->
+<article id="invoice_pannel"></article>
+<article id="receipt_pannel"></article>
+<!--include "./components/layer/footer.html"-->
+<script>
+  $(function(){
+	var token = getParams('token');
+    $('#invoice_pannel').load('invoice.html', {token:token});
+    $('#receipt_pannel').load('receipt.html',{token:token});
+  })
+</script>

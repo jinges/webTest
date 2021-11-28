@@ -110,7 +110,7 @@ function totalInfo(res, invoice){
     rateInfoList[2]['lastItem'] = '<span class="b">£'+totalInfo.totalinclVAT+'</span>';
 
     var totalStr = template(totalInfo_tmp, {
-      totalInfo: res.totalInfo,
+      totalInfo: res.itemTotalInfo,
       rateInfoList: rateInfoList
     })
     content.append(totalStr);
