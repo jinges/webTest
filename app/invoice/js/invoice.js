@@ -44,6 +44,17 @@ function renderInvocie(invoice, data){
   pagingFun(page, list, ch);
 
   totalInfo(data, invoice);
+  addWhitePage(invoice, page);
+}
+
+//补增空白页
+function addWhitePage(invoice, page){
+  var pageNum = $(invoice).find('.page').length;
+  if(pageNum % 2){
+    var whitePage = $(page).clone();
+    whitePage.html('');
+    invoice.append(whitePage);
+  }
 }
 
 function pagingFun(page, list, ch, step){

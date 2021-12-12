@@ -44,6 +44,7 @@ var pcpaths = {
                 root + '/js/receipt.js',
                 root + '/js/invoice.js',
                 root + '/js/zxreading.js',
+                root + '/js/payoffreceipt.js',
             ],
             build: tmp_root + '/js'
         },
