@@ -1,5 +1,5 @@
 
-var HOST = '/cashierapp/web'; //'http://51.195.136.75:9527/cashierapp/web';//'http://wx.fxswap.cn';//
+var HOST = '/cashierapp/web';//'http://51.195.136.75:9527/cashierapp/web';//'http://wx.fxswap.cn';//
 
 var apilist = {
 	receipt:  HOST+'/print/receipt',
