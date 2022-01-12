@@ -14,7 +14,7 @@ function initInvoicePage(){
         lastInvoice.after(invoice);
       }
       var invoice = $('#invoice'+index);
-      invoice.find('.page').not('section[id="page1"]').remove();
+      invoice.find('.page').not('section.page1').remove();
       var data = res[index];
       renderInvocie(invoice, data)
       data = null;
@@ -23,7 +23,7 @@ function initInvoicePage(){
 }
 
 function renderInvocie(invoice, data){
-  var page = $(invoice).find('#page1');
+  var page = $(invoice).find('.page1');
   var content = page.find('.content');
   var invoice_tmp = $('#invoice_tmp').html();
   var invoiceStr = template(invoice_tmp, {
@@ -41,6 +41,7 @@ function renderInvocie(invoice, data){
   //订单详情
   var list = data.invoiceDetailList;
   var ch = computeContentHeight(page);
+
   pagingFun(page, list, ch);
 
   totalInfo(data, invoice);
@@ -53,6 +54,8 @@ function addWhitePage(invoice, page){
   if(pageNum % 2){
     var whitePage = $(page).clone();
     whitePage.html('');
+    whitePage.removeAttr('id');
+    whitePage.attr({'class': 'page'});
     invoice.append(whitePage);
   }
 }
@@ -84,7 +87,8 @@ function addNewPage(currentPage){
   var index = currentPage.attr('data-index');
   var newPage = currentPage.clone();
   var newIndex= index * 1 + 1;
-  newPage.attr({'id': 'page'+newIndex, 'data-index': newIndex});
+  newPage.attr({'class': 'page', 'data-index': newIndex});
+  newPage.addClass('page'+newIndex)
   newPage.find('.invoice, .invoice_info').remove();
   newPage.find('.list tbody tr').remove();
   newPage.find('.page_num').text(newIndex);

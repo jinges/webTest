@@ -1,7 +1,7 @@
 function payoffReceiptInit(){
   var queryId = getParams('queryId') || 1;
   getData('payoffreceipt',{queryId: queryId},function(err, rows){
-    var list = ['dhamechaHeadOffice','receiptInfo','paymentTotalInfo','paymentTotalInfo','pendingSummary'];
+    var list = ['dhamechaHeadOffice','receiptInfo','paymentTotalInfo','paymentTotalInfo','iouSummary','pendingSummary'];
     
     for(var index = 0,len = rows.length; index < len; index++) {
       if(index){
