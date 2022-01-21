@@ -1,5 +1,5 @@
 <!--include "./components/layer/header.html"-->
-<section class="z_index">
+<section class="z_index z_page">
   <div class="box">
     <table class="first" id="cashierInfo">
       
@@ -44,6 +44,8 @@
   </div>
 </section>
 
+<article class="zreport_pannel" id="zreport_pannel"></article>
+
 <!--include "./components/layer/footer.html"-->
 <!--include "./template/reading/cashierInfo.tmpl"-->
 <!--include "./template/reading/countInfo.tmpl"-->
@@ -52,5 +54,7 @@
 <script>
   $(function(){
     initReadingPage();
+	  var token = getParams('token');
+    $('#zreport_pannel').load('z_report.html',{token:token});
   })
 </script>

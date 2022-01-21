@@ -1,5 +1,5 @@
 .index{
-  padding: 10px 0 50px;
+  // padding: 10px 0 50px;
   font-size: px2rem(10px);
   .page{
     width: 794px;
@@ -29,6 +29,9 @@
   }
   .shop_info{
     // font-size: px2rem(6.5px);
+  }
+  .report{
+    display: none;
   }
   .invoice{
     font-weight: 400;

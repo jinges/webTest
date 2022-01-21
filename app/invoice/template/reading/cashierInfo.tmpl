@@ -12,7 +12,11 @@
     </td>
   </tr>
   <tr>
+  <% if(showDate) { %>
+    <td>Date: <span class="b500"><%=date%></span></td>
+  <%} else{%>
     <td>Logged In: <span class="b500"><%=loggedin%></span></td>
+  <%}%>
     <td><% if(loginoff) { %>Logged Off: <span class="b500"><%=loggedOff%></span><%}%></td>
     <td><span class="b500"></span></td>
   </tr>

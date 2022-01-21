@@ -4,7 +4,13 @@ function initReadingPage(){
   var pathName = window.location.pathname;
   getData('xzreding',{salesType: salesType,pathName: pathName},function(err, res){
     var cashierInfo = res.cashierInfo
-    cashierInfo.loginoff = pathName.indexOf('x_reading') > -1;
+    if(pathName.indexOf('x_reading') > -1){
+      cashierInfo.loginoff = true;
+      cashierInfo.showDate = false;
+    } else {
+      cashierInfo.showDate = true;
+      cashierInfo.loginoff = false;
+    }
 
     $('#cashierInfo').html(template($('#cashierInfo_tmp').html(), cashierInfo));
 

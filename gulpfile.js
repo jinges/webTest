@@ -76,7 +76,7 @@ gulp.task('script', function () {
             presets: ['es2015']
         }))
         .pipe(concat('app.js'))
-        .pipe(gulp.dest(paths.origin.script.build))
+        // .pipe(gulp.dest(paths.origin.script.build))
         .pipe(uglify())
         .pipe(rename({
           extname: '.min.js'

@@ -1,0 +1,37 @@
+<script type="text/html" id="Zreport_tmp">
+<% for(var i in reports) { %>
+<% var item = reports[i]%>
+<div class="item">
+  <div class="head grid">
+    <h4 class="cell title"><%=item.payType%></h4>
+    <div style="width: 30%;">
+      Date: <span><%=item.date%></span>
+      Till: <span><%=item.till%></span>
+    </div>
+  </div>
+  <div class="contents grid">
+    <div class="cell left">
+      <div class="table_head">
+        <span>Receipt ID</span>
+        <span>PAYMENT AMOUNT</span>
+      </div>
+      <div class="table_body">
+      <% for(var j in item.receiptAmountList) { %>
+        <% var r_item = item.receiptAmountList[j]%>
+        <p class="table_td" <% if(item.receiptAmountList.length > 3) { %>style="width:50%;"<%}%>>
+          <span><%=r_item.receiptId%></span>
+          <span><%=r_item.paymentAmount%></span>
+        </p>
+      <% }%>
+      </div>
+    </div>
+    <div class="cell right">
+      <p>No of Receipt: <span><%=item.noOfReceipt%></span></p>
+      <p>Total Sales: <span><%=item.totalSales%></span></p>
+      <p>Total Payoff: <span><%=item.totalPayoff%></span></p>
+      <p>Total NET Amount: <span><%=item.totalNetAmount%></span></p>
+    </div>
+  </div>
+</div>
+<% }%>
+</script>
