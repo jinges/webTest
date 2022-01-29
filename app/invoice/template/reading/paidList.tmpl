@@ -1,4 +1,15 @@
 <script type="text/html" id="paidList_tmp">
+  <thead   align="center">
+  <tr>
+    <td></td>
+    <td class="b600"> Cash</td>
+    <td class="b600">Mobile</td>
+    <td class="b600">Card</td>
+    <td class="b600">Voucher</td>
+    <td class="b600">Total</td>
+  </tr>
+  </thead>
+  <tbody   align="center">
 <% for (var i in paidList) { %>
 <% var item = paidList[i]%>
 <tr>
@@ -6,7 +17,10 @@
   <td class="b500 violet tu">£ <%=item.cash%></td>
   <td>£ <%=item.mobile%></td>
   <td>£ <%=item.card%></td>
+  <td>£ <%=item.voucher%></td>
   <td class="b700">£ <%=item.total%></td>
 </tr>
 <%}%>
+</tbody>
+    </table>
 </script>

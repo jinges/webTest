@@ -21,6 +21,6 @@ function initReadingPage(){
 
     $('#x_salesReconciliation').html(template($('#x_salesReconciliation_tmp').html(),res.salesReconciliation));
 
-    $('#paidList tbody').html(template($('#paidList_tmp').html(),{paidList: res.paidList}));
+    $('#paidList').html(template($('#paidList_tmp').html(),{paidList: res.paidList}));
   })
 }

@@ -19,7 +19,7 @@ const gulp = require('gulp'),
     assetRev = require('gulp-asset-rev');
 
 var paths = {};
-var host = '192.168.0.9';
+var host = '192.168.99.187';
 
 
 function logError(err) {
