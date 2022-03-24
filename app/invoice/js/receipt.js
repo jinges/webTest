@@ -1,7 +1,7 @@
 function initReceiptPage(){
   var queryId = getParams('queryId') || 1;
   getData('receipt',{queryId: queryId},function(err, rows){
-    var list = ['dhamechaHeadOffice','receiptInfo','invoiceTotalInfo','paymentTotalInfo','paymentTotalInfo','iouSummary','pendingSummary'];
+    var list = ['dhamechaHeadOffice','receiptInfo', 'cashChange', 'payDetailList','invoiceTotalInfo','paymentTotalInfo','paymentTotalInfo','iouSummary','pendingSummary'];
     
     for(var index = 0,len = rows.length; index < len; index++) {
       if(index){
@@ -12,7 +12,14 @@ function initReceiptPage(){
       }
       var page = rows[index];
       for(var item of list) {
-        $('#page'+index).find('#'+item).html(template($('#'+item+'_tmp').html(), page[item]));
+        var data = page[item];
+        if('payDetailList' == item){
+          data = {payDetailList: data}
+        }
+        if(item == 'cashChange' && !page[item]){
+          continue;
+        }
+        $('#page'+index).find('#'+item).html(template($('#'+item+'_tmp').html(), data));
       }
     }
   })

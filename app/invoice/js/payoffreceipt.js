@@ -1,7 +1,7 @@
 function payoffReceiptInit(){
   var queryId = getParams('queryId') || 1;
   getData('payoffreceipt',{queryId: queryId},function(err, rows){
-    var list = ['dhamechaHeadOffice','receiptInfo','paymentTotalInfo','paymentTotalInfo','iouSummary','pendingSummary'];
+    var list = ['dhamechaHeadOffice','receiptInfo','paymentTotalInfo', 'payDetailList','paymentTotalInfo','iouSummary','pendingSummary'];
     
     for(var index = 0,len = rows.length; index < len; index++) {
       if(index){
@@ -14,8 +14,11 @@ function payoffReceiptInit(){
       var page = rows[index];
       for(var item of list) {
         var temp = (item == 'pendingSummary'? item +'2': item);
-        console.log(temp,item);
-        $('#page'+index).find('#'+item).html(template($('#'+temp+'_tmp').html(), page[item]));
+        var data = page[item];
+        if('payDetailList' == item){
+          data = {payDetailList: data}
+        }
+        $('#page'+index).find('#'+item).html(template($('#'+temp+'_tmp').html(), data));
       }
     }
   })

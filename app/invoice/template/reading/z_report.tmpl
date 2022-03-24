@@ -8,29 +8,14 @@
     </div>
   </div>
   <div class="contents grid">
-    <div class="left">
-      <div class="table_head">
-        <span>Receipt ID</span>
-        <span>PAYMENT AMOUNT</span>
-      </div>
-      <div class="table_body">
-      <% for(var j in receiptAmountList) { %>
-        <% var item = receiptAmountList[j]%>
-        <p class="table_td" style="width: <%=width%>">
-          <span><%=item.receiptId%></span>
-          <span><%=item.paymentAmount%></span>
-        </p>
-      <% }%>
-      </div>
-    </div>
     <div class="cell right">
       <p>No of Receipt: <span><%=noOfReceipt%></span></p>
-      <% if(if(payType == 'IOU'){ %>
+      <% if(payType == 'IOU'){ %>
         <p>IOU Issued: <span><%=totalSales%></span></p>
         <p>IOU Paid Off: <span><%=totalPayoff%></span></p>
-        <p>IOU Paid Off(CASH): <span><%=totalPayoff%></span></p>
-        <p>IOU Paid Off(MOBILE): <span><%=totalPayoff%></span></p>
-        <p>IOU Paid Off(CARD): <span><%=totalPayoff%></span></p>
+        <p>IOU Paid Off(CASH): <span><%=iouPaidOffCash%></span></p>
+        <p>IOU Paid Off(MOBILE): <span><%=iouPaidOffMobile%></span></p>
+        <p>IOU Paid Off(CARD): <span><%=iouPaidOffCard%></span></p>
       <% } else {%>
         <p>Total Sales: <span><%=totalSales%></span></p>
          <p>Total Refund: <span><%=totalPayoff%></span></p>

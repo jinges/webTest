@@ -28,7 +28,9 @@ function renderInvocie(invoice, data){
   var invoice_tmp = $('#invoice_tmp').html();
   var invoiceStr = template(invoice_tmp, {
     invoice: data.invoice,
-    business: data.business
+    business: data.business,
+    customerId: data.orderInfo.customerId,
+    customerRegisterNo: data.orderInfo.customerRegisterNo
   });
   content.before(invoiceStr);
   invoiceStr = '';
@@ -72,10 +74,15 @@ function pagingFun(page, list, ch, step){
   var cth = content.height();
   if((ch - cth) >= 200){
     pagingFun(page, list, ch, step);
-  } else {
-    if(ch > (cth + 24)){
+  } else if(ch > (cth + 24)){
       pagingFun(page, list, ch, 1);
-    } else if(list.length){
+  } else {
+    if(cth > ch){
+    content.find('tr').last().remove();
+    var lastRow = items.splice(-1);
+    list.unshift(lastRow[0]);
+    } 
+    if(list.length){
       var nextPage = addNewPage(page);
       var ch = computeContentHeight(nextPage);
       pagingFun(nextPage, list, ch);
@@ -126,7 +133,8 @@ function totalInfo(res, invoice){
 
     var totalStr = template(totalInfo_tmp, {
       totalInfo: res.itemTotalInfo,
-      rateInfoList: rateInfoList
+      rateInfoList: rateInfoList,
+      textDiscountList: res.textDiscountList
     })
     content.append(totalStr);
     totalStr = null;
@@ -144,9 +152,9 @@ function totalInfo(res, invoice){
 function cutTotalTable(currentPage, nextPage,content, ch){
   var lastTr = currentPage.find('.count_total tr').last();
   var newTr = lastTr.clone();
-  nextPage.find('.count_total tbody').prepend();
+  nextPage.find('.count_total tbody').prepend(newTr);
   lastTr.remove();
-  newTr.remove();
+  // newTr.remove();
   var cth = content.height();
   if(cth > ch){
     cutTotalTable(currentPage, nextPage, content, ch)

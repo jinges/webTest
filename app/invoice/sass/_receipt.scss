@@ -54,6 +54,14 @@
         }
       }
     }
+    .left_second{
+      margin-top: px2rem(8px);
+      td{
+        width: 50%;
+        border: 1px solid rgba(203, 203, 203, 1);
+        padding-left: px2rem(20px);
+      }
+    }
     .right{
       margin-left: px2rem(8px);
       table{
@@ -82,6 +90,12 @@
   .footer{
     p:last-child{
       visibility: hidden;
+    }
+  }
+  .pay_list{
+    padding-top: 60px;
+    p{
+      padding: 5px 0;
     }
   }
 }

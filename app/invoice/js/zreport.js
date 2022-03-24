@@ -13,6 +13,7 @@ function renderZreport(){
   })
 
   function renderPage(page, data,contentHeight){
+    debugger;
     for(var i = 0, length = data.length; i < length; i++){
       var item = data[i];
       var len = item.receiptAmountList.length;
@@ -29,9 +30,6 @@ function renderZreport(){
       const listHeight = content.height();
       console.log(listHeight, contentHeight);
       if(listHeight > contentHeight){
-        console.log(i);
-        --i;
-        console.log(i);
         content.find('.item').last().remove();
         var nextPage = addNewPage(page);
         page = nextPage;

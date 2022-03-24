@@ -3,9 +3,24 @@
 <article class="count_total" id="totalInfo">
  <table  align="center">
   <tbody>
+  <% if(textDiscountList.length) {%>
+    <tr class="trade_save">
+      <td colspan="7">
+        Trade & Save
+      </td>
+    </tr>
+    <% for(var i in textDiscountList){%>
+      <% var item = textDiscountList[i]%>
+      <tr class="trade_save">
+        <td colspan="6"><%=item.text%></td>
+        <td colspan="1"><span><%=item.discount%></span></td>
+      </tr>
+    <% } %>
+    <tr><td></td></tr>
+    <%}%>
     <tr class="total">
       <td colspan="7">
-        <span>Items Total:<%=totalInfo.itemsTotal%></span>
+        <span>Items Total: <%=totalInfo.itemsTotal%></span>
       </td>
     </tr>
     <tr>

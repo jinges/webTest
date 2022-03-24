@@ -15,5 +15,17 @@
         <td><%=item.por%></td>
         <td><%=item.vat%></td>
       </tr>
+      <% if(item.text.length){%>
+      <tr>
+        <td colspan="7"  class="text_change">
+        <span><%=item.text%><span> 
+        </td>
+        <td colspan="4"  class="text_change">
+        <% if(item.changeValue.length && item.changeValue != '-') { %>
+          <%=item.changeValue%>
+        <%}%>
+        </td>
+      </tr>
+       <%}%>
     <%}%>
 </script>
