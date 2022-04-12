@@ -19,6 +19,9 @@ function initReceiptPage(){
         if(item == 'cashChange' && !page[item]){
           continue;
         }
+        if(item == 'pendingSummary'){
+          data = page['iouSummary']
+        }
         $('#page'+index).find('#'+item).html(template($('#'+item+'_tmp').html(), data));
       }
     }

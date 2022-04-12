@@ -14,11 +14,15 @@
   <tr>
   <% if(showDate) { %>
     <td>Date: <span class="b500"><%=date%></span></td>
+    <td>Start Time: <span class="b500"><%=startTime%></span></td>
+    <td>End Time: <span class="b500"><%=endTime%></span></td>
   <%} else{%>
     <td>Logged In: <span class="b500"><%=loggedin%></span></td>
   <%}%>
-    <td><% if(loginoff) { %>Logged Off: <span class="b500"><%=loggedOff%></span><%}%></td>
+  <% if(loginoff) { %>
+    <td>Logged Off: <span class="b500"><%=loggedOff%></span></td>
     <td><span class="b500"></span></td>
+    <%}%>
   </tr>
   <tr>
     <td>First Invoice Number: <span class="b500"><%=firstInvoiceNumber%></span></td>
