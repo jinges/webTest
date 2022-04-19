@@ -59,6 +59,7 @@ gulp.task('concat', async function(){
 });
 
 gulp.task('sass', async function () {
+    console.log(paths.origin.styles.source);
     return gulp.src(paths.origin.styles.source)
         .pipe(sass())
         .pipe(concat('style.css'))
@@ -75,7 +76,7 @@ gulp.task('sass', async function () {
 gulp.task('script', async function () {
     return gulp.src(paths.origin.script.source)
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['@babel/env']
         }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest(paths.origin.script.build))
@@ -100,6 +101,7 @@ gulp.task('static', async function(){
 })
 
 gulp.task('images', async function() {
+    console.log(paths.origin.images.source);
     return gulp.src(paths.origin.images.source)
         .pipe(imagemin())
         .pipe(gulp.dest(paths.origin.images.build))
