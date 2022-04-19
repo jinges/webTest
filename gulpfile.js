@@ -1,25 +1,27 @@
-const gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    contentIncluder = require('gulp-content-includer'),
-    minifyHtml = require('gulp-minify-html'),
-    minifyCss = require('gulp-minify-css'),
-    uglify = require('gulp-uglify'),
-    connect = require('gulp-connect'),
-    jshint = require('gulp-jshint'),
-    imagemin = require('gulp-imagemin'),
-    rename = require('gulp-rename'),
-    sass = require('gulp-sass'),
-    livereload = require('gulp-livereload'),
-    del = require('del'),
-    fs = require('fs'),
-    opn = require('opn'),
-    babel = require('gulp-babel'),
-    replace = require('gulp-replace'),
-    templatejs = require('gulp-templatejs'),
-    assetRev = require('gulp-asset-rev');
+import gulp from 'gulp';
+import concat  from 'gulp-concat';
+import contentIncluder  from 'gulp-content-includer';
+import minifyHtml  from 'gulp-minify-html';
+import minifyCss  from 'gulp-minify-css';
+import uglify  from 'gulp-uglify';
+import connect  from 'gulp-connect';
+import rename  from 'gulp-rename';
+import gulpSass  from 'gulp-sass';
+import nodeSass from 'node-sass';
+import livereload  from 'gulp-livereload';
+import del  from 'del';
+import fs  from 'fs';
+import opn  from 'opn';
+import babel  from 'gulp-babel';
+import replace  from 'gulp-replace';
+import assetRev  from 'gulp-asset-rev';
+import imagemin from 'gulp-imagemin';
+
+
+import pcpaths from './config/invoice-path.js';
 
 var paths = {};
-var host = '192.168.0.6';
+var sass = gulpSass(nodeSass);
 
 
 function logError(err) {
@@ -35,11 +37,11 @@ var validateResources = function (resources) {
     });
 }
 
-gulp.task('clean', function (cb) {
+gulp.task('clean', async function (cb) {
     del( 'build', cb);
 });
 
-gulp.task('concat', function(){
+gulp.task('concat', async function(){
     const v = (+new Date()).toString(32);
     return gulp.src(paths.origin.html.source)
         .pipe(contentIncluder({
@@ -56,7 +58,7 @@ gulp.task('concat', function(){
         .pipe(livereload());
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', async function () {
     return gulp.src(paths.origin.styles.source)
         .pipe(sass())
         .pipe(concat('style.css'))
@@ -70,7 +72,7 @@ gulp.task('sass', function () {
         .pipe(livereload());
 });
 
-gulp.task('script', function () {
+gulp.task('script', async function () {
     return gulp.src(paths.origin.script.source)
         .pipe(babel({
             presets: ['es2015']
@@ -85,19 +87,19 @@ gulp.task('script', function () {
         .pipe(livereload());
 });
 
-gulp.task('fonts', function(){
+gulp.task('fonts', async function(){
     return gulp.src(paths.origin.fonts.source)
         .pipe(gulp.dest(paths.origin.fonts.build))
         .pipe(livereload());
 })
 
-gulp.task('static', function(){
+gulp.task('static', async function(){
     return gulp.src(paths.origin.static.source)
         .pipe(gulp.dest(paths.origin.static.build))
         .pipe(livereload());
 })
 
-gulp.task('images', function() {
+gulp.task('images', async function() {
     return gulp.src(paths.origin.images.source)
         .pipe(imagemin())
         .pipe(gulp.dest(paths.origin.images.build))
@@ -105,32 +107,31 @@ gulp.task('images', function() {
 });
 
 
-gulp.task('template', function(){
+gulp.task('template', async function(){
     return gulp.src(paths.origin.template)
         .pipe(livereload());
 })
 
 
 
-gulp.task('connect', ['concat', 'sass', 'script', 'images','template', 'fonts', 'static'], function () {
+gulp.task('connect', gulp.series('concat', 'sass', 'script', 'images','template', 'fonts', 'static', async function () {
     connect.server({
         livereload:true,
         root: paths.tmp_root,
-        host: host,
         port: 8080
     });
 
     livereload.listen();
-})
+}))
 
-gulp.task('watch', function () {
-    gulp.watch(paths.origin.html.source, ['concat']);
-    gulp.watch(paths.origin.components.source, ['concat']);
-    gulp.watch(paths.origin.styles.source, ['sass']);
-    gulp.watch(paths.origin.script.source, ['script']);
-    gulp.watch(paths.origin.images.source, ['images']);
-    gulp.watch(paths.origin.images.source, ['static']);
-    gulp.watch(paths.origin.template, ['template']);
+gulp.task('watch', async function () {
+    gulp.watch(paths.origin.html.source, gulp.series('concat'));
+    gulp.watch(paths.origin.components.source, gulp.series('concat'));
+    gulp.watch(paths.origin.styles.source, gulp.series('sass'));
+    gulp.watch(paths.origin.script.source, gulp.series('script'));
+    gulp.watch(paths.origin.images.source, gulp.series('images'));
+    gulp.watch(paths.origin.images.source, gulp.series('static'));
+    gulp.watch(paths.origin.template, gulp.series('template'));
     livereload.listen();
 });
 
@@ -184,62 +185,61 @@ gulp.task('clock-config', function () {
     var notePath = require('./config/clock-path.js');
     paths = notePath;
 })
-gulp.task('invoice-config', function () {
-    var notePath = require('./config/invoice-path.js');
-    paths = notePath;
+gulp.task('invoice-config', async function () {
+    paths = pcpaths;
 })
 
 
 
-gulp.task('web', ['web-config', 'connect', 'watch'])
+gulp.task('web', gulp.series('web-config', 'connect', 'watch'))
 
-gulp.task('ballot', ['ballot-config', 'connect', 'watch'], function(){
+gulp.task('ballot', gulp.series('ballot-config', 'connect', 'watch', function(){
    
-})
+}))
 
-gulp.task('vr', ['vr-config', 'connect', 'watch'], function () {
+gulp.task('vr', gulp.series('vr-config', 'connect', 'watch', function () {
     
-})
+}))
 
-gulp.task('game', ['game-config', 'connect', 'watch'], function () {
+gulp.task('game', gulp.series('game-config', 'connect', 'watch', function () {
     opn('http://localhost:8088');
-})
-gulp.task('votes', ['votes-config', 'connect', 'watch'], function () {
+}))
+gulp.task('votes', gulp.series('votes-config', 'connect', 'watch', function () {
     
-})
+}))
 
-gulp.task('group-buy', ['group-buy-config', 'connect', 'watch'], function () {
+gulp.task('group-buy', gulp.series('group-buy-config', 'connect', 'watch', function () {
     
-})
-gulp.task('education', ['education-config', 'connect', 'watch'], function () {
+}))
+gulp.task('education', gulp.series('education-config', 'connect', 'watch', function () {
     
-})
-gulp.task('postcard', ['postcard-config', 'connect', 'watch'], function () {
+}))
+gulp.task('postcard', gulp.series('postcard-config', 'connect', 'watch', function () {
     
-})
-gulp.task('note', ['note-config', 'connect', 'watch'], function () {
+}))
+gulp.task('note', gulp.series('note-config', 'connect', 'watch', function () {
     
-})
-gulp.task('fc', ['FC-config', 'connect', 'watch'], function () {
+}))
+gulp.task('fc', gulp.series('FC-config', 'connect', 'watch', function () {
     
-})
-gulp.task('FM', ['FM-config', 'connect', 'watch'], function () {
+}))
+gulp.task('FM', gulp.series('FM-config', 'connect', 'watch', function () {
  
-})
-gulp.task('clock', ['clock-config', 'connect', 'watch'], function () {
+}))
+gulp.task('clock', gulp.series('clock-config', 'connect', 'watch', function () {
  
-})
+}))
 
-gulp.task('invoice', ['invoice-config', 'connect', 'watch'], function () {
+gulp.task('invoice', gulp.series('invoice-config', 'connect', 'watch', async function () {
  
-})
+}))
 
 
 
-gulp.task('default', ['invoice'], function(){
-    opn('http://'+host+':8080');
-})
+gulp.task('default', gulp.series('invoice', async function(){
+    opn('http://localhost:8080');
+}))
 
-gulp.task('build', ['invoice'])
+gulp.task('build', gulp.series('invoice'))
 
 

@@ -54,4 +54,4 @@ var pcpaths = {
     tmp_root: tmp_root
 }
 
-module.exports = pcpaths;
+export default pcpaths;
