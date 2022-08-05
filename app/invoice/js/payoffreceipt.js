@@ -21,5 +21,7 @@ function payoffReceiptInit(){
         $('#page'+index).find('#'+item).html(template($('#'+temp+'_tmp').html(), data));
       }
     }
+    
+    window.JSBridge.pageFinished('test');
   })
 }

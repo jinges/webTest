@@ -19,6 +19,9 @@ function initInvoicePage(){
       renderInvocie(invoice, data)
       data = null;
     }
+    setTimeout(function(){
+      window.JSBridge.pageFinished('test');
+    }, 1000)
   });
 }
 

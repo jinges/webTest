@@ -22,5 +22,7 @@ function initReceiptPage(){
         $('#page'+index).find('#'+item).html(template($('#'+item+'_tmp').html(), data));
       }
     }
+    
+    window.JSBridge.pageFinished('test');
   })
 }
