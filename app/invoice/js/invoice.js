@@ -1,6 +1,7 @@
 function initInvoicePage(){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
+  var noPrint = getParams('noPrint');
   getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
     
     for(var index = 0,len  = res.length; index < len; index++){
@@ -19,9 +20,10 @@ function initInvoicePage(){
       renderInvocie(invoice, data)
       data = null;
     }
-    setTimeout(function(){
+    
+    if(!noPrint){
       window.JSBridge.pageFinished('test');
-    }, 1000)
+    }
   });
 }
 

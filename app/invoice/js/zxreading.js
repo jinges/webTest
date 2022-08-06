@@ -1,4 +1,4 @@
-function initReadingPage(){
+function initReadingPage(noPrint){
   
 	var salesType = getParams('sales_type');
   var pathName = window.location.pathname;
@@ -22,6 +22,8 @@ function initReadingPage(){
     $('#x_salesReconciliation').html(template($('#x_salesReconciliation_tmp').html(),res.salesReconciliation));
 
     $('#paidList').html(template($('#paidList_tmp').html(),{paidList: res.paidList}));
-    window.JSBridge.pageFinished('test');
+    if(!noPrint){
+      window.JSBridge.pageFinished('test');
+    }
   })
 }

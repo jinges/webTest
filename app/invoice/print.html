@@ -5,7 +5,7 @@
 <script>
   $(function(){
 	var token = getParams('token');
-    $('#invoice_pannel').load('invoice.html', {token:token});
+    $('#invoice_pannel').load('invoice.html', {token:token, noPrint: true});
     $('#receipt_pannel').load('receipt.html',{token:token});
   })
 </script>
