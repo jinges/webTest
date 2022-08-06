@@ -38,6 +38,7 @@
 <!--include "./template/invoice/invoiceDetailList.tmpl"-->
 <script>
   $(function(){
-    initInvoicePage();
+	var noPrint = getParams('noPrint');
+    initInvoicePage(noPrint);
   })
 </script>

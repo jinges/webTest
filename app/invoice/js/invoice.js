@@ -1,7 +1,6 @@
-function initInvoicePage(){
+function initInvoicePage(noPrint){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
-  var noPrint = getParams('noPrint');
   getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
     
     for(var index = 0,len  = res.length; index < len; index++){
