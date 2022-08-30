@@ -5,8 +5,6 @@ function initInvoicePage(noPrint){
     
     for(var index = 0,len  = res.length; index < len; index++){
       if(index){
-        console.log(index);
-        debugger;
         var lastInvoice = $('.invoicePage').last()
         var invoice = lastInvoice.clone();
         invoice.attr('id', 'invoice'+index);
@@ -20,7 +18,8 @@ function initInvoicePage(noPrint){
       data = null;
     }
     
-    if(!noPrint){
+    ++loadCount;
+    if(!noPrint || (loadCount > 1 && noPrint)){
       window.JSBridge.pageFinished('test');
     }
   });

@@ -8,3 +8,5 @@ var apilist = {
 	payoffreceipt: HOST+'/print/payoffReceipt',
 	zreport: HOST+'/print/zReadingReport'
 }
+
+var loadCount = 0;

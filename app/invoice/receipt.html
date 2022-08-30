@@ -50,6 +50,8 @@
 
 <script>
   $(function(){
-    initReceiptPage();
+	var noPrint = window.location.pathname.includes('print.html');
+    console.log('-------receipt', noPrint);
+    initReceiptPage(noPrint);
   })
 </script>
