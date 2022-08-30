@@ -2,28 +2,25 @@ function initInvoicePage(noPrint){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
   getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
-    
-    for(var index = 0,len  = res.length; index < len; index++){
-      if(index){
-        console.log(index);
-        debugger;
-        var lastInvoice = $('.invoicePage').last()
-        var invoice = lastInvoice.clone();
-        invoice.attr('id', 'invoice'+index);
-        invoice.find('.invoice,.invoice_info,.count_total, .list tbody tr').remove()
-        lastInvoice.after(invoice);
-      }
-      var invoice = $('#invoice'+index);
-      invoice.find('.page').not('section.page1').remove();
-      var data = res[index];
-      renderInvocie(invoice, data)
-      data = null;
-    }
-    
-    if(!noPrint){
-      window.JSBridge.pageFinished('test');
-    }
+    cutInvoiceData(res, noPrint, 0);
   });
+}
+
+function cutInvoiceData(res, noPrint, index){
+  var invoice = $('#invoice'+index);
+  invoice.find('.page').not('section.page1').remove();
+  var data = res[index];
+  renderInvocie(invoice, data);
+  if(res.length){
+    var lastInvoice = $('.invoicePage').last()
+    var invoice = lastInvoice.clone();
+    invoice.attr('id', 'invoice'+index);
+    invoice.find('.invoice,.invoice_info,.count_total, .list tbody tr').remove()
+    lastInvoice.after(invoice);
+    cutInvoiceData(res, ++index);
+  } else if(!noPrint){
+      window.JSBridge.pageFinished('test');
+  }
 }
 
 function renderInvocie(invoice, data){
