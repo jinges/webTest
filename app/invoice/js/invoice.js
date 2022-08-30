@@ -2,27 +2,34 @@ function initInvoicePage(noPrint){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
   getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
-    
-    for(var index = 0,len  = res.length; index < len; index++){
-      if(index){
-        var lastInvoice = $('.invoicePage').last()
-        var invoice = lastInvoice.clone();
-        invoice.attr('id', 'invoice'+index);
-        invoice.find('.invoice,.invoice_info,.count_total, .list tbody tr').remove()
-        lastInvoice.after(invoice);
-      }
-      var invoice = $('#invoice'+index);
-      invoice.find('.page').not('section.page1').remove();
-      var data = res[index];
-      renderInvocie(invoice, data)
-      data = null;
+    var startTime = new Date().getTime();
+    try{
+      cutInvoiceData(res, noPrint, 0);
+    } catch(e){
+      console.log(e);
     }
-    
-    ++loadCount;
-    if(!noPrint || (loadCount > 1 && noPrint)){
-      window.JSBridge.pageFinished('test');
-    }
+    console.log('用时：'+(new Date().getTime()-startTime));
   });
+}
+
+function cutInvoiceData(res, noPrint, index){
+  debugger;
+  var invoice = $('#invoice'+index);
+  invoice.find('.page').not('section.page1').remove();
+  var data = res.shift();
+  renderInvocie(invoice, data);
+  data = null;
+  if(res.length){
+    ++index;
+    var lastInvoice = $('.invoicePage').last()
+    var invoice = lastInvoice.clone();
+    invoice.attr('id', 'invoice'+index);
+    invoice.find('.invoice,.invoice_info,.count_total, .list tbody tr').remove()
+    lastInvoice.after(invoice);
+    cutInvoiceData(res, noPrint, index);
+  } else if(!noPrint){
+      window.JSBridge.pageFinished('test');
+  }
 }
 
 function renderInvocie(invoice, data){
@@ -68,23 +75,23 @@ function addWhitePage(invoice, page){
 function pagingFun(page, list, ch, step){
   step = step || 10;
   var items = list.splice(0, step);
-  var content = page.find('.content');
   if(!items.length){
     return false;
   }
 
-  content.find('.list tbody').append(invoiceRnder(items));
-  var cth = content.height();
+  page.find('.content').find('.list tbody').append(invoiceRnder(items));
+  var cth = page.find('.content').height();
   if((ch - cth) >= 200){
     pagingFun(page, list, ch, step);
   } else if(ch > (cth + 24)){
       pagingFun(page, list, ch, 1);
   } else {
     if(cth > ch){
-    content.find('tr').last().remove();
-    var lastRow = items.splice(-1);
-    list.unshift(lastRow[0]);
+      page.find('.content').find('tr').last().remove();
+      var lastRow = items.splice(-1);
+      list.unshift(lastRow[0]);
     } 
+    items = null;
     if(list.length){
       var nextPage = addNewPage(page);
       var ch = computeContentHeight(nextPage);
