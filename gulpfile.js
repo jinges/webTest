@@ -7,7 +7,7 @@ import uglify  from 'gulp-uglify';
 import connect  from 'gulp-connect';
 import rename  from 'gulp-rename';
 import gulpSass  from 'gulp-sass';
-import nodeSass from 'node-sass';
+import dartSass from 'sass';
 import livereload  from 'gulp-livereload';
 import del  from 'del';
 import fs  from 'fs';
@@ -21,7 +21,7 @@ import imagemin from 'gulp-imagemin';
 import pcpaths from './config/invoice-path.js';
 
 var paths = {};
-var sass = gulpSass(nodeSass);
+var sass = gulpSass(dartSass);
 
 
 function logError(err) {
@@ -80,7 +80,7 @@ gulp.task('script', async function () {
         }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest(paths.origin.script.build))
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(rename({
           extname: '.min.js'
         }))

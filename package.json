@@ -38,14 +38,13 @@
     "gulp-uglify": "^3.0.2",
     "gulp-utf8-convert": "^0.0.7",
     "jshint": "^2.10.2",
-    "node-sass": "^4.7.2",
     "opn": "^5.5.0",
     "true-case-path": "^1.0.2",
     "vinyl-buffer": "^1.0.1"
   },
   "dependencies": {
     "jquery": "^3.4.1",
-    "natives": "^1.1.6"
+    "sass": "^1.54.8"
   },
   "overrides": {
     "graceful-fs": "^4.2.8"
