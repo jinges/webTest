@@ -1,7 +1,13 @@
 <script type="text/html" id="Zreport_tmp">
 <div class="item">
   <div class="head grid">
-    <h4 class="cell title"><%=payType%> <%=totalAmount%> </h4>
+    <h4 class="cell title">
+      <% if(payType == 'IOU'){ %>
+        IOU Issued: <span><%=totalSales%></span> &nbsp;&nbsp;
+        IOU Paid Off: <span><%=totalPayoff%></span>
+      <% } else {%>
+        <%=payType%> <%=totalAmount%>
+      <%} %> </h4>
     <div style="width: 30%;">
       Date: <span><%=date%></span>
       Till: <span><%=till%></span>
@@ -10,13 +16,7 @@
   <div class="contents grid">
     <div class="cell right">
       <p>No of Receipt: <span><%=noOfReceipt%></span></p>
-      <% if(payType == 'IOU'){ %>
-        <p>IOU Issued: <span><%=totalSales%></span></p>
-        <p>IOU Paid Off: <span><%=totalPayoff%></span></p>
-        <p>IOU Paid Off(CASH): <span><%=iouPaidOffCash%></span></p>
-        <p>IOU Paid Off(MOBILE): <span><%=iouPaidOffMobile%></span></p>
-        <p>IOU Paid Off(CARD): <span><%=iouPaidOffCard%></span></p>
-      <% } else {%>
+      <% if(payType != 'IOU'){ %>
         <p>Total Sales: <span><%=totalSales%></span></p>
          <p>Total Refund: <span><%=totalPayoff%></span></p>
       <%} %>
