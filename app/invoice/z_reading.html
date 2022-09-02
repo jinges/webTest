@@ -54,7 +54,7 @@
 <!--include "./template/reading/paidList.tmpl"-->
 <script>
   $(function(){
-    initReadingPage();
+    initReadingPage('noPrint');
 	  var token = getParams('token');
     $('#zreport_pannel').load('z_report.html',{token:token});
   })

@@ -4,8 +4,8 @@
 <!--include "./components/layer/footer.html"-->
 <script>
   $(function(){
-	var token = getParams('token');
-    $('#invoice_pannel').load('invoice.html', {token:token});
+	  var token = getParams('token');
     $('#receipt_pannel').load('receipt.html',{token:token});
+    $('#invoice_pannel').load('invoice.html', {token:token, noPrint: true});
   })
 </script>

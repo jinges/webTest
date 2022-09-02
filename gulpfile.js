@@ -21,6 +21,7 @@ import imagemin from 'gulp-imagemin';
 import pcpaths from './config/invoice-path.js';
 
 var paths = {};
+
 var sass = gulpSass(nodeSass);
 
 
@@ -80,7 +81,7 @@ gulp.task('script', async function () {
         }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest(paths.origin.script.build))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(rename({
           extname: '.min.js'
         }))

@@ -32,13 +32,14 @@
 </section>
 <!--include "./components/layer/footer.html"-->
 
-<!--include "./template/invoice/header.tmpl"-->
 <!--include "./template/invoice/invoice.tmpl"-->
 <!--include "./template/invoice/orderInfo.tmpl"-->
 <!--include "./template/invoice/totalInfo.tmpl"-->
 <!--include "./template/invoice/invoiceDetailList.tmpl"-->
 <script>
   $(function(){
-    initInvoicePage();
+	var noPrint = window.location.pathname.includes('print.html');
+  console.log('-------invoice', noPrint);
+    initInvoicePage(noPrint);
   })
 </script>

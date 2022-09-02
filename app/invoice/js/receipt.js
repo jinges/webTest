@@ -1,4 +1,4 @@
-function initReceiptPage(){
+function initReceiptPage(noPrint){
   var queryId = getParams('queryId') || 1;
   getData('receipt',{queryId: queryId},function(err, rows){
     var list = ['dhamechaHeadOffice','receiptInfo', 'cashChange', 'payDetailList','invoiceTotalInfo','paymentTotalInfo','paymentTotalInfo','iouSummary','pendingSummary'];
@@ -24,6 +24,11 @@ function initReceiptPage(){
         }
         $('#page'+index).find('#'+item).html(template($('#'+item+'_tmp').html(), data));
       }
+    }
+    
+    ++loadCount;
+    if(!noPrint || (loadCount > 1 && noPrint)){
+      window.JSBridge.pageFinished('test');
     }
   })
 }

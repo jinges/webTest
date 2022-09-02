@@ -10,6 +10,7 @@ function renderZreport(){
     var firstPage = $('.page');
     let contentHeight = computeContentHeight(firstPage);
     renderPage(firstPage, res,contentHeight);
+    window.JSBridge.pageFinished('test');
   })
 
   function renderPage(page, data,contentHeight){
