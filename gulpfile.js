@@ -80,7 +80,7 @@ gulp.task('script', async function () {
         }))
         .pipe(concat('app.js'))
         .pipe(gulp.dest(paths.origin.script.build))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(rename({
           extname: '.min.js'
         }))

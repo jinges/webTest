@@ -12,7 +12,7 @@ function ajax(type, url, data, cb){
 			if(res.code == 200){
 				cb(null, res.data);
 			} else {
-				cb(res.errMsg);
+				window.JSBridge.pageFinished('test');
 			}
 		}
 	})

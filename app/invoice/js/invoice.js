@@ -8,7 +8,7 @@ function initInvoicePage(noPrint){
     } catch(e){
       console.log(e);
     }
-    console.log('用时：'+(new Date().getTime()-startTime));
+    // console.log('用时：'+(new Date().getTime()-startTime));
   });
 }
 
@@ -54,9 +54,9 @@ function renderInvocie(invoice, data){
   var list = data.invoiceDetailList;
   var ch = computeContentHeight(page);
 
-  pagingFun(page, list, ch);
+  var rest_height = pagingFun(page, list, ch);
 
-  totalInfo(data, invoice);
+  totalInfo(data, invoice,rest_height);
   addWhitePage(invoice, page);
 }
 
@@ -76,15 +76,15 @@ function pagingFun(page, list, ch, step){
   step = step || 10;
   var items = list.splice(0, step);
   if(!items.length){
-    return false;
+    return 0;
   }
 
   page.find('.content').find('.list tbody').append(invoiceRnder(items));
   var cth = page.find('.content').height();
-  if((ch - cth) >= 200){
-    pagingFun(page, list, ch, step);
-  } else if(ch > (cth + 24)){
-      pagingFun(page, list, ch, 1);
+  if((ch - cth) >= 200 && list.length){
+    return pagingFun(page, list, ch, step);
+  } else if(ch > (cth + 24) && list.length){
+      return pagingFun(page, list, ch, 1);
   } else {
     if(cth > ch){
       page.find('.content').find('tr').last().remove();
@@ -95,7 +95,9 @@ function pagingFun(page, list, ch, step){
     if(list.length){
       var nextPage = addNewPage(page);
       var ch = computeContentHeight(nextPage);
-      pagingFun(nextPage, list, ch);
+      return pagingFun(nextPage, list, ch);
+    } else {
+      return ch - cth
     }
   }
 }
@@ -127,10 +129,10 @@ function computeContentHeight(page){
   return pageHeight - h - 22;
 }
 
-function totalInfo(res, invoice){
+function totalInfo(res, invoice, rest_height){
     //订单总计
     var lastPage = $(invoice).find('.page').last();
-    var content = lastPage.find('.content');
+    var prevPage = null;
     var totalInfo_tmp = $('#totalInfo_tmp').html();
     var totalInfo = res.totalInfo;
     var rateInfoList = res.rateInfoList;
@@ -146,27 +148,41 @@ function totalInfo(res, invoice){
       rateInfoList: rateInfoList,
       textDiscountList: res.textDiscountList
     })
-    content.append(totalStr);
-    totalStr = null;
 
-    var cth = content.height();
-    var ch = computeContentHeight(lastPage);
-    if(cth > ch){
+    if(rest_height < 140){
       var nextPage = addNewPage(lastPage);
       nextPage.find('.list').remove();
       nextPage.find('.count_total tr').remove();
-      cutTotalTable(lastPage, nextPage, content, ch)
+      prevPage = lastPage;
+      lastPage = nextPage;
     }
+    var content = lastPage.find('.content');
+    content.append(totalStr);
+    totalStr = null;
+    var fristTr = content.find('.count_total').find('tr').first();
+    if(!prevPage || fristTr.height() > rest_height){
+      return false;
+    }
+
+    var copyTable = content.find('.count_total').clone();
+    copyTable.find('tr').remove();
+    prevPage.find('.content').append(copyTable);
+    
+    var ch = computeContentHeight(prevPage);
+    cutTotalTable(lastPage, prevPage, ch)
 }
 
-function cutTotalTable(currentPage, nextPage,content, ch){
-  var lastTr = currentPage.find('.count_total tr').last();
-  var newTr = lastTr.clone();
-  nextPage.find('.count_total tbody').prepend(newTr);
-  lastTr.remove();
+function cutTotalTable(currentPage, prevPage, ch,content){
+  var firstTr = currentPage.find('.count_total tr').first();
+  var newTr = firstTr.clone();
+  prevPage.find('.count_total tbody').prepend(newTr);
+  firstTr.remove();
+  if(!content){
+    content = prevPage.find('.content');
+  }
   // newTr.remove();
   var cth = content.height();
-  if(cth > ch){
-    cutTotalTable(currentPage, nextPage, content, ch)
+  if(cth < ch){
+    cutTotalTable(currentPage, prevPage, ch, content)
   }
 }

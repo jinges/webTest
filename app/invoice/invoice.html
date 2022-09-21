@@ -38,7 +38,7 @@
 <!--include "./template/invoice/invoiceDetailList.tmpl"-->
 <script>
   $(function(){
-	var noPrint = window.location.pathname.includes('print.html');
+	var noPrint = false;//window.location.pathname.includes('print.html');
   console.log('-------invoice', noPrint);
     initInvoicePage(noPrint);
   })
