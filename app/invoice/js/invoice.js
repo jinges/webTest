@@ -1,22 +1,22 @@
 function initInvoicePage(noPrint){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
-  getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
+  getData('test',{queryId: queryId, queryType: queryType},function(err, res){
     var startTime = new Date().getTime();
     try{
       cutInvoiceData(res, noPrint, 0);
     } catch(e){
       console.log(e);
     }
-    // console.log('用时：'+(new Date().getTime()-startTime));
+    console.log('用时：'+(new Date().getTime()-startTime));
   });
 }
 
 function cutInvoiceData(res, noPrint, index){
-  debugger;
   var invoice = $('#invoice'+index);
   invoice.find('.page').not('section.page1').remove();
   var data = res.shift();
+  debugger;
   renderInvocie(invoice, data);
   data = null;
   if(res.length){
@@ -159,8 +159,8 @@ function totalInfo(res, invoice, rest_height){
     var content = lastPage.find('.content');
     content.append(totalStr);
     totalStr = null;
-    var fristTr = content.find('.count_total').find('tr').first();
-    if(!prevPage || fristTr.height() > rest_height){
+    var firstTr = content.find('.count_total').find('tr').first();
+    if(!prevPage || firstTr.height() > rest_height){
       return false;
     }
 
@@ -169,20 +169,20 @@ function totalInfo(res, invoice, rest_height){
     prevPage.find('.content').append(copyTable);
     
     var ch = computeContentHeight(prevPage);
-    cutTotalTable(lastPage, prevPage, ch)
+    cutTotalTable(lastPage, prevPage, firstTr, ch)
 }
 
-function cutTotalTable(currentPage, prevPage, ch,content){
-  var firstTr = currentPage.find('.count_total tr').first();
-  var newTr = firstTr.clone();
-  prevPage.find('.count_total tbody').prepend(newTr);
-  firstTr.remove();
+function cutTotalTable(currentPage, prevPage, firstTr, ch,content){
+  var newTr = firstTr;
+  prevPage.find('.count_total tbody').append(newTr);
+  // firstTr.remove();
   if(!content){
     content = prevPage.find('.content');
   }
   // newTr.remove();
   var cth = content.height();
-  if(cth < ch){
-    cutTotalTable(currentPage, prevPage, ch, content)
+  firstTr = currentPage.find('.count_total tr').first();
+  if(ch - cth > firstTr.height() ){
+    cutTotalTable(currentPage, prevPage, firstTr, ch, content)
   }
 }
