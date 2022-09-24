@@ -75,6 +75,7 @@ function addWhitePage(invoice, page){
 function pagingFun(page, list, ch, step){
   step = step || 10;
   var items = list.splice(0, step);
+  var copyList = items.clone();
   if(!items.length){
     return 0;
   }
@@ -88,10 +89,10 @@ function pagingFun(page, list, ch, step){
   } else {
     if(cth > ch){
       page.find('.content').find('tr').last().remove();
-      var lastRow = items.splice(-1);
+      var lastRow = copyList.splice(-1);
       list.unshift(lastRow[0]);
     } 
-    items = null;
+    copyList = null;
     if(list.length){
       var nextPage = addNewPage(page);
       var ch = computeContentHeight(nextPage);
