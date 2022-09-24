@@ -72,10 +72,18 @@ function addWhitePage(invoice, page){
   }
 }
 
+function cloneArr(oldArr){
+  var arr = [];
+  for(var i = 0, len = oldArr.length; i < len; i++){
+    arr[i] = oldArr[i]
+  }
+  return arr;
+}
+
 function pagingFun(page, list, ch, step){
   step = step || 10;
   var items = list.splice(0, step);
-  var copyList = items.clone();
+  var copyList = cloneArr(items);
   if(!items.length){
     return 0;
   }
