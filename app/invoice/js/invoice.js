@@ -1,7 +1,7 @@
 function initInvoicePage(noPrint){
   var queryId = getParams('queryId') || 1;
   var queryType = getParams('queryType') || 'Invoice';
-  getData('test',{queryId: queryId, queryType: queryType},function(err, res){
+  getData('invoice',{queryId: queryId, queryType: queryType},function(err, res){
     var startTime = new Date().getTime();
     try{
       cutInvoiceData(res, noPrint, 0);
