@@ -158,25 +158,23 @@ function totalInfo(res, invoice, rest_height){
       textDiscountList: res.textDiscountList
     })
 
-    if(rest_height < 140){
-      var nextPage = addNewPage(lastPage);
-      nextPage.find('.list').remove();
-      nextPage.find('.count_total tr').remove();
-      prevPage = lastPage;
-      lastPage = nextPage;
-    }
     var content = lastPage.find('.content');
     content.append(totalStr);
     totalStr = null;
-    var firstTr = content.find('.count_total').find('tr').first();
-    if(!prevPage || firstTr.height() > rest_height){
+
+    
+
+    var total_height = lastPage.find('.count_total').height();
+    if(rest_height < total_height){
+      var nextPage = addNewPage(lastPage);
+      nextPage.find('.list').remove();
+      lastPage.find('.count_total tr').remove();
+      prevPage = lastPage;
+      lastPage = nextPage;
+    } else {
       return false;
     }
-
-    var copyTable = content.find('.count_total').clone();
-    copyTable.find('tr').remove();
-    prevPage.find('.content').append(copyTable);
-    
+    var firstTr = lastPage.find('.count_total').find('tr').first();
     var ch = computeContentHeight(prevPage);
     cutTotalTable(lastPage, prevPage, firstTr, ch)
 }
